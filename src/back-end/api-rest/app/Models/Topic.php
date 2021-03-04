@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property SubjectCourse $subject_course
  * @property Collection|Ask[] $asks
- * @property Collection|Class[] $classes
+ * @property Collection|Classrom[] $classroms
  *
  * @package App\Models
  */
@@ -52,8 +52,8 @@ class Topic extends Model
 		return $this->hasMany(Ask::class, 'idTopic');
 	}
 
-	public function classes()
+	public function classroms()
 	{
-		return $this->hasMany(Class::class, 'idTopic');
+		return $this->hasMany(Classrom::class, 'idTopic');
 	}
 }

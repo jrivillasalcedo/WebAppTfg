@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $groupState
  * @property int|null $active
  * 
- * @property Collection|Class[] $classes
+ * @property Collection|Classrom[] $classroms
  *
  * @package App\Models
  */
@@ -38,8 +38,8 @@ class Group extends Model
 		'active'
 	];
 
-	public function classes()
+	public function classroms()
 	{
-		return $this->hasMany(Class::class, 'idGroup');
+		return $this->hasMany(Classrom::class, 'idGroup');
 	}
 }

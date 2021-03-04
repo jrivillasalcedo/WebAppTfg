@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Class
+ * Class Classrom
  * 
  * @property int $idClass
  * @property int $idSubjectCourse
@@ -31,9 +31,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Class extends Model
+class Classrom extends Model
 {
-	protected $table = 'class';
+	protected $table = 'classrom';
 	protected $primaryKey = 'idClass';
 	public $timestamps = false;
 
