@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $idClass
  * @property int|null $active
  * 
- * @property Class $class
+ * @property Classrom $classrom
  * @property User $user
  *
  * @package App\Models
@@ -39,9 +39,9 @@ class TeacherClass extends Model
 		'active'
 	];
 
-	public function class()
+	public function classrom()
 	{
-		return $this->belongsTo(Class::class, 'idClass');
+		return $this->belongsTo(Classrom::class, 'idClass');
 	}
 
 	public function user()

@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property Role $role
  * @property Collection|Ask[] $asks
- * @property Collection|Class[] $classes
+ * @property Collection|Classrom[] $classroms
  * @property Collection|StudentClass[] $student_classes
  * @property Collection|StudentRegistered[] $student_registereds
  * @property Collection|Subject[] $subjects
@@ -83,9 +83,9 @@ class User extends Model
 		return $this->hasMany(Ask::class, 'idStudent');
 	}
 
-	public function classes()
+	public function classroms()
 	{
-		return $this->hasMany(Class::class, 'idTeacherCreator');
+		return $this->hasMany(Classrom::class, 'idTeacherCreator');
 	}
 
 	public function student_classes()

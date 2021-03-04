@@ -99,7 +99,7 @@ CREATE TABLE bdAppWeb.groups (
 
 )ENGINE=InnoDB;
 
-CREATE TABLE bdAppWeb.class (
+CREATE TABLE bdAppWeb.classrom (
     idClass BIGINT UNSIGNED AUTO_INCREMENT NOT NULL,	    
 	idSubjectCourse  BIGINT UNSIGNED NOT NULL,
 	idTopic BIGINT UNSIGNED NOT NULL,	
@@ -130,7 +130,7 @@ CREATE TABLE bdAppWeb.ask (
     active INTEGER DEFAULT 1,
 	PRIMARY KEY (idAsk),
 	INDEX (idAsk),
-    CONSTRAINT fk_idClass FOREIGN KEY (idClass) REFERENCES bdAppWeb.class (idClass) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk_idClass FOREIGN KEY (idClass) REFERENCES bdAppWeb.classrom (idClass) ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT fk_idRopic FOREIGN KEY (idTopic) REFERENCES bdAppWeb.topic (idTopic) ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT fk_idStudent FOREIGN KEY (idStudent) REFERENCES bdAppWeb.user (idUser) ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB;
@@ -155,7 +155,7 @@ CREATE TABLE bdAppWeb.teacher_class (
 	PRIMARY KEY (idTeacherClass),
 	INDEX (idTeacherClass),
     CONSTRAINT fk_idTeacherClass FOREIGN KEY (idTeacher) REFERENCES bdAppWeb.user (idUser) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT fk_idClassTeacher FOREIGN KEY (idClass) REFERENCES bdAppWeb.class (idClass) ON UPDATE CASCADE ON DELETE CASCADE
+	CONSTRAINT fk_idClassTeacher FOREIGN KEY (idClass) REFERENCES bdAppWeb.classrom (idClass) ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 CREATE TABLE bdAppWeb.student_registered (
@@ -191,23 +191,23 @@ CREATE TABLE bdAppWeb.student_class (
 	PRIMARY KEY (idStudentClass),
 	INDEX (idStudentClass),
     CONSTRAINT fk_idStuentClass FOREIGN KEY (idStudent) REFERENCES bdAppWeb.user (idUser) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT fk_idClassStudent FOREIGN KEY (idClass) REFERENCES bdAppWeb.class (idClass) ON UPDATE CASCADE ON DELETE CASCADE
+	CONSTRAINT fk_idClassStudent FOREIGN KEY (idClass) REFERENCES bdAppWeb.classrom (idClass) ON UPDATE CASCADE ON DELETE CASCADE
 )ENGINE=InnoDB;
 
-CREATE VIEW classInfoView AS (Select class.idClass, class.idSubjectCourse, class.idTopic, class.idTeacherCreator, class.idGroup, class.classState, subject.subjectName,subject.idSubject, groups.groupName, topic.topicName, user.userName,user.userSurname from class 
-                                inner join subject_course on subject_course.idSubjectCourse = class.idSubjectCourse
+CREATE VIEW ViewClassromInfo AS (Select classrom.idClass, classrom.idSubjectCourse, classrom.idTopic, classrom.idTeacherCreator, classrom.idGroup, classrom.classState, subject.subjectName,subject.idSubject, groups.groupName, topic.topicName, user.userName,user.userSurname from classrom 
+                                inner join subject_course on subject_course.idSubjectCourse = classrom.idSubjectCourse
                                 inner join subject on subject_course.idSubject = subject.idSubject
                                 inner join course on course.idCourse = subject_course.idCourse
-                                inner join groups on class.idGroup = groups.idGroup 
-                                inner join topic on class.idTopic = topic.idTopic 
-                                inner join user on class.idTeacherCreator = user.idUser
+                                inner join groups on classrom.idGroup = groups.idGroup 
+                                inner join topic on classrom.idTopic = topic.idTopic 
+                                inner join user on classrom.idTeacherCreator = user.idUser
                                	where course.actualCourse = 1);
 
-CREATE VIEW ViewStudentsStats AS (SELECT COUNT(subquery.idClass) AS asistanceClass, subquery.idUser, subquery.userName, subquery.userSurname,subquery.mail,subquery.indentificationNumber,subquery.dni,subquery.subjectName, subquery.idSubject, subquery.idCourse, subquery.courseName,SUM(subquery.studentBaned)AS numberBaned FROM (SELECT user.idUser, user.userName, user.userSurname, user.mail,user.indentificationNumber, user.dni,student_class.studentBaned, subject.subjectName, course.courseName, class.idClass, course.idCourse,subject.idSubject 
+CREATE VIEW ViewStudentsStats AS (SELECT COUNT(subquery.idClass) AS asistanceClass, subquery.idUser, subquery.userName, subquery.userSurname,subquery.mail,subquery.indentificationNumber,subquery.dni,subquery.subjectName, subquery.idSubject, subquery.idCourse, subquery.courseName,SUM(subquery.studentBaned)AS numberBaned FROM (SELECT user.idUser, user.userName, user.userSurname, user.mail,user.indentificationNumber, user.dni,student_class.studentBaned, subject.subjectName, course.courseName, classrom.idClass, course.idCourse,subject.idSubject 
 									FROM user 
 									INNER JOIN student_class ON student_class.idStudent = user.idUser
-									INNER JOIN class ON class.idClass = student_class.idClass
-									INNER JOIN subject_course ON subject_course.idSubjectCourse = class.idSubjectCourse
+									INNER JOIN classrom ON classrom.idClass = student_class.idClass
+									INNER JOIN subject_course ON subject_course.idSubjectCourse = classrom.idSubjectCourse
 									INNER JOIN subject ON subject.idSubject = subject_course.idSubject
 									INNER JOIN course ON course.idCourse = subject_course.idCourse)AS subquery GROUP BY (subquery.idUser));
 
@@ -284,7 +284,7 @@ INSERT INTO  bdAppWeb.degree(nombreGrado)  VALUES ("Ingenieria de softwarte");
 
 INSERT INTO  bdAppWeb.topic(idSubject,topicName,descripciontopic)VALUES(1,"Tema  1","descripcion del tema  1");
 
-INSERT INTO  bdAppWeb.class(idSubject,idTeacherCreator,codAcc, grupo)VALUES(1,1,"1234","GM67");
+INSERT INTO  bdAppWeb.classrom(idSubject,idTeacherCreator,codAcc, grupo)VALUES(1,1,"1234","GM67");
 
 INSERT INTO bdAppWeb.ask(idTopic, idClass, askContenido)VALUES(1,1,"Esta es la pregunta?");
 

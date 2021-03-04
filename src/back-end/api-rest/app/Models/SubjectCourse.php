@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property Course $course
  * @property Subject $subject
- * @property Collection|Class[] $classes
+ * @property Collection|Classrom[] $classroms
  * @property Collection|StudentRegistered[] $student_registereds
  * @property Collection|TeacherSubject[] $teacher_subjects
  * @property Collection|Topic[] $topics
@@ -53,9 +53,9 @@ class SubjectCourse extends Model
 		return $this->belongsTo(Subject::class, 'idSubject');
 	}
 
-	public function classes()
+	public function classroms()
 	{
-		return $this->hasMany(Class::class, 'idSubjectCourse');
+		return $this->hasMany(Classrom::class, 'idSubjectCourse');
 	}
 
 	public function student_registereds()

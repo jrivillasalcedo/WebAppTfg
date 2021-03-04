@@ -9,7 +9,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Classinfoview
+ * Class Viewclassrominfo
  * 
  * @property int $idClass
  * @property int $idSubjectCourse
@@ -26,9 +26,9 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class Classinfoview extends Model
+class Viewclassrominfo extends Model
 {
-	protected $table = 'classinfoview';
+	protected $table = 'viewclassrominfo';
 	public $incrementing = false;
 	public $timestamps = false;
 

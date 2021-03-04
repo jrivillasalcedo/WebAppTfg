@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $answer
  * @property int|null $active
  * 
- * @property Class $class
+ * @property Classrom $classrom
  * @property Topic $topic
  * @property User $user
  *
@@ -50,9 +50,9 @@ class Ask extends Model
 		'active'
 	];
 
-	public function class()
+	public function classrom()
 	{
-		return $this->belongsTo(Class::class, 'idClass');
+		return $this->belongsTo(Classrom::class, 'idClass');
 	}
 
 	public function topic()
